@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-
+from .models import users, reviews, books
 import bcrypt, re
 from django.contrib import messages
 # Create your views here.
