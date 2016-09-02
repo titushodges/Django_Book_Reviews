@@ -6,9 +6,9 @@ urlpatterns = [
 	url(r'^books$', views.home),
 	url(r'^books/add$', views.add),
 	url(r'^books/(?P<item_id>\d+)$', views.show),
-	url(r'^users/(?P<item_id>\d+)$', views.users),
+	url(r'^users/(?P<user_id>\d+)$', views.user),
 	url(r'^books/create$', views.create),
 	url(r'^login$', views.login),
 	url(r'^register$', views.register),
-	url(r'^review$', views.review),
+	url(r'^review/(?P<item_id>\d+)$', views.review),
 ]
