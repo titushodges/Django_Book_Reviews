@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{books.0.title}}</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Reviews/css/text.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<a href="/books">Home</a>
+			<a href="/logout">Logout</a>
+		</div>
+		<div id="book_title">
+			<h2>{{books.0.title}}</h2>
+			<p>Author: {{books.0.author}}</p>
+		</div>
+		<div id="book_page">
+			<h3>Reviews:</h3>
+			{% for review in reviews %}
+				<hr>
+				{{review}}
+				<p>Rating: {{review.rating}}/5 stars.</p>
+				<p><a href="/users/{{review.user_id.id}}">{{ review.user_id.alias }}</a> says: {{review.review}}</p>
+				<p>Posted on {{review.created_at}}</p>
+				{% if review.user_id.id == logged_id.0.id %}
+					<a href="/delete/{{logged_id.0.id}}">Delete this Review</a>
+				{% endif %}
+			{% endfor %}
+			<h3>Add a Review:</h3>
+			<form action="/review/{{books.0.id}}" method="POST">
+				{% csrf_token %}
+				<input type="hidden" name="this_id" value="{{books.0.id}}">
+				<input type="hidden" name="your_id" value="{{logged_id.0.id}}">
+				<textarea name="review"></textarea>
+				<label>Rating: <input type="number" name="rating" min="1" max="5" value="5"> stars.</label>
+				<input type="submit" value="Submit Review">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

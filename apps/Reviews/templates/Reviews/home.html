@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books Home</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Reviews/css/text.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<h2>Welcome, {{ user.0.name }}!</h2>
+			<a href="/books/add">Add Book and Review</a>
+			<a href="/logout">Logout</a>
+		</div>
+		<div id="recent">
+			<h3>Recent Book Reviews</h3>
+			{% for highlight in highlights %}
+				<h4><a href="/books/{{highlight.book_id.id}}">{{ highlight.book_id.title }}</a></h4>
+				<p>Rating: {{highlight.rating}}/5 stars.</p>
+				<p><a href="/users/{{highlight.user_id.id}}">{{ highlight.user_id.alias }}</a> says: {{highlight.review}}</p>
+				<p>Posted on {{highlight.created_at}}</p>
+			{% endfor %}
+		</div>
+		<div id="books">
+			<h3>Other Books with Reviews:</h3>
+			<div id="list_books">
+				{% for review in reviews %}
+					<p><a href="books/{{review.book_id.id}}">{{ review.book_id.title }}</a></p>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

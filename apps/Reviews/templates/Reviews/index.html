@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome!</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Reviews/css/text.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<h2>Welcome!</h2>
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{message}}</p>
+			{% endfor %}
+		{% endif %}
+		<div id="register">
+			<h4>Register</h4>
+			<form action="/register" method="POST">
+				{% csrf_token %}
+				<label>Name: <input type="text" name="name"></label>
+				<label>Alias: <input type="text" name="alias"></label>
+				<label>Email: <input type="text" name="email"></label>
+				<label>Password: <input type="password" name="password"></label>
+				<p>*Password should be at least 8 characters</p>
+				<label>Confirm PW: <input type="password" name="confirm_password"></label>
+				<input type="submit" value="Register">
+			</form>
+		</div>
+		<div id="Login">
+			<h4>Login</h4>
+			<form action="/login" method="POST">
+				{% csrf_token %}
+				<label>Email: <input type="text" name="email"></label>
+				<label>Password: <input type="password" name="password"></label>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

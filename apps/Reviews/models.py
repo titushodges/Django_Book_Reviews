@@ -19,9 +19,9 @@ class books(models.Model):
 
 class reviews(models.Model):
 	review = models.TextField()
-	rating = models.CharField(max_length=255)
-	user_id = models.ForeignKey(users, related_name='user_id', blank=True, null=True)
-	book_id = models.ForeignKey(books, blank=True, null=True)
+	rating = models.IntegerField()
+	user_id = models.ForeignKey(users, related_name='user_id', null=True, blank=True)
+	book_id = models.ForeignKey(books, null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 

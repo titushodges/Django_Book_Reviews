@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Reviews/css/text.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<a href="/books">Home</a>
+			<a href="/logout">Logout</a>
+		</div>
+		{% if messages %}
+			{% for message in messages %}
+				<p>{{message}}</p>
+			{% endfor %}
+		{% endif %}
+		<div id="new_book">
+			<h3>Add a New Book Title and a Review:</h3>
+			<form action="/books/create" method="POST">
+				{% csrf_token %}
+				<label>Book Title: <input type="text" name="title"></label>
+				<h4>Author:</h4>
+				<label>Choose from the list: 
+					<select name="author1">
+					{% for items in info %}
+						<option value="{{items.author}}">{{items.author}}</option>
+					{% endfor %}
+					</select>
+				</label>
+				<label>Or add a new author: <input type="text" name="author"></label>
+				<h4>Review:</h4>
+				<textarea name="review"></textarea>
+				<label>Rating: <input type="number" name="rating" min="1" max="5" value="5"> stars.</label>
+				<input type="submit" name="Add Book and Review">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
